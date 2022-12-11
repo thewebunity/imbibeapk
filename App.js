@@ -14,7 +14,21 @@ export default function App() {
   return (
     <>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Main" >
+        <Stack.Navigator  initialRouteName="Home"
+            activeColor="#f0edf6"
+            inactiveColor="#3e2465"
+            barStyle={{ backgroundColor: '#694fad' }}
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: '#5110D1',
+                },
+                headerTitleStyle: {
+                    color: '#fff',
+                    fontSize: 16,
+                    fontWeight: '800',
+                    fontFamily: "Poppins-Light"
+                }
+            }} >
           <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
           <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
