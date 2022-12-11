@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         color:'#5110D1'
     },
     banner: {
-        backgroundColor: '#4a6fe8',
+        backgroundColor: '#5110D1',
         padding: 25,
         margin: 15,
         borderRadius: 15,
