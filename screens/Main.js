@@ -25,7 +25,6 @@ const Main = () => {
             barStyle={{ backgroundColor: '#694fad' }}
             screenOptions={{
                 headerStyle: {
-                    height: 90,
                     backgroundColor: '#5110D1',
                 },
                 headerTitleStyle: {
