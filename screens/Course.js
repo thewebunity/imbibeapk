@@ -41,7 +41,7 @@ const Course = ({navigation}) => {
                         <TouchableOpacity
                             style={styles.buttonStyle}
                             onPress={() => navigation.navigate('Video')}>
-                            <Text style={styles.buttonText}>COURSE DETAILS </Text>
+                            <Text style={styles.buttonText}>View</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -58,7 +58,7 @@ const Course = ({navigation}) => {
     }
     return (
         <View style={styles.container}>
-            <FlatList data={Course} renderItem={courseCard} keyExtractor={(item) => item.id}></FlatList>
+            <FlatList data={Course} renderItem={courseCard} showsVerticalScrollIndicator={false} keyExtractor={(item) => item.id}></FlatList>
         </View>
     );
 }
@@ -115,12 +115,11 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
+        paddingHorizontal:'30%',   
     },
     buttonStyle: {
         backgroundColor: "#5110D1",
-        borderRadius: 5,
+        borderRadius: 20,
         paddingVertical: 8,
         paddingHorizontal: 8,
         display: "flex",

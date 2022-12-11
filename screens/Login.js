@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, SafeAreaView, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Link } from '@react-navigation/native';
-import { useState,useEffect } from 'react';
-import { getAuth, signInWithEmailAndPassword ,onAuthStateChanged} from "firebase/auth";
+import { useState, useEffect } from 'react';
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import app from '../Firebase';
 import { useFonts } from 'expo-font';
 const auth = getAuth(app);
@@ -16,7 +16,7 @@ const Login = ({ navigation }) => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 navigation.navigate('Main')
-            } 
+            }
         });
     }
     useEffect(() => {
@@ -28,11 +28,11 @@ const Login = ({ navigation }) => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 navigation.navigate('Main')
-})
+            })
             .catch((error) => {
             });
     }
-    
+
     let [fontsLoaded] = useFonts({
         "Poppins-Light": require('../assets/fonts/Poppins-Light.ttf')
     });
@@ -60,6 +60,7 @@ const Login = ({ navigation }) => {
                     />
                     <Text style={styles.input_label}>Password</Text>
                     <TextInput
+                        secureTextEntry={true}
                         style={styles.input}
                         onChangeText={setPassword}
                         value={Password}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet,Text, TextInput, TouchableOpacity, Button } from 'react-native';
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, Button } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useState } from 'react';
 import { Link } from '@react-navigation/native';
@@ -12,12 +12,12 @@ const Signup = ({ navigation }) => {
     const [Email, setEmail] = useState('');
     const [Password, setPassword] = useState('');
 
-  
+
     const Signup = () => {
         createUserWithEmailAndPassword(auth, Email, Password)
             .then((userCredential) => {
-                 const user = userCredential.user;
-                 navigation.navigate('Login')
+                const user = userCredential.user;
+                navigation.navigate('Login')
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -26,7 +26,7 @@ const Signup = ({ navigation }) => {
                 // ..
             });
     }
- 
+
     let [fontsLoaded] = useFonts({
         "Poppins-Light": require('../assets/fonts/Poppins-Light.ttf')
     });
@@ -54,6 +54,7 @@ const Signup = ({ navigation }) => {
                     />
                     <Text style={styles.input_label}>Password</Text>
                     <TextInput
+                        secureTextEntry={true}
                         style={styles.input}
                         onChangeText={setPassword}
                         value={Password}
