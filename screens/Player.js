@@ -1,39 +1,66 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Button, View } from 'react-native';
-import { Video } from 'expo-av';
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { Video,VideoFullscreenUpdateEvent } from 'expo-av';
 import React from 'react';
 
-export default function Player() {
+export default function Player({navigation}) {
   const video = React.useRef(null);
-
+  const [status, setStatus] = React.useState({});
+ 
 
   return (
     <View style={styles.container}>
       <Video
         ref={video}
         style={styles.video}
-        source={{uri: "https://d1bvrav3s9ghz3.cloudfront.net/video.mp4"}}
+        source={{ uri: "https://d1bvrav3s9ghz3.cloudfront.net/video.mp4" }}
         useNativeControls
-        resizeMode='contain'
+        resizeMode="contain"
+        isLooping
+        onPlaybackStatusUpdate={setStatus}
+
       />
-      <StatusBar style="auto" />
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.buttonStyle}
+          onPress={() => navigation.goBack()}>
+          <Text style={styles.buttonText}>Go Back</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: "100%",
+    flex: 1,
   },
   video: {
-    flex: 1,
-    justifyContent:'flex-start',
-    alignItems:'center',
+    height: 200,
   },
-  buttons: {
-    margin: 16
-  }
+  buttonContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems:'flex-end',
+    marginTop: 30,
+  },
+  buttonStyle: {
+    // backgroundColor: "#5110D1",
+    borderRadius: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 40,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontFamily: "Poppins-Light",
+    marginBottom: 10,
+  },
+  buttonText: {
+    fontSize: 16,
+    color: "#5110D1",
+    textTransform: "capitalize",
+    fontWeight:'800'
+  },
 });

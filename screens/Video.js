@@ -25,7 +25,6 @@ const Home = ({ route, navigation }) => {
             return { ...doc.data(), id: doc.id };
         })
         setVideos([...Videos, ...theseData]);
-        console.log(Videos)
     }
     if (!fontsLoaded) {
         return null;
@@ -60,7 +59,7 @@ const Home = ({ route, navigation }) => {
     return (
         <>
             <View style={styles.container}>
-                <FlatList data={Videos} renderItem={VideosCard} keyExtractor={(item) => item.index}></FlatList>
+                <FlatList data={Videos} renderItem={VideosCard} keyExtractor={(item) => item.id}></FlatList>
             </View>
         </>
     );

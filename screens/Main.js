@@ -12,7 +12,13 @@ const Main = () => {
     return (
         <Tab.Navigator screenOptions={{
             tabBarActiveTintColor: '#5110D1',
-        }}>
+            headerStyle: { backgroundColor: "#5110D1", color: '#fff' }
+        }}
+            initialRouteName="Home"
+            activeColor="#f0edf6"
+            inactiveColor="#3e2465"
+            barStyle={{ backgroundColor: '#694fad' }}
+        >
             <Tab.Screen name="Home" component={Home} options={{
                 tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name="home" color={color} size={size} />
@@ -23,7 +29,7 @@ const Main = () => {
                     <MaterialCommunityIcons name="note" color={color} size={size} />
                 ),
             }} />
-            <Tab.Screen name="Your Courses" component={Course} options={{
+            <Tab.Screen name="Courses" component={Course} options={{
                 tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name="book" color={color} size={size} />
                 ),

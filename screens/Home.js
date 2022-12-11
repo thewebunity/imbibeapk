@@ -1,17 +1,15 @@
 import React from 'react';
-import { StyleSheet, View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
-import { useEffect, useRef, useState } from 'react';
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { getDocs, collection, getFirestore, setDoc, doc } from 'firebase/firestore'
+import { StyleSheet, View, Text } from 'react-native';
+import { useRef, useEffect } from 'react';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useFonts } from 'expo-font';
 import app from '../Firebase';
 const auth = getAuth(app);
-const db = getFirestore(app);
+
 
 
 
 const Home = ({ navigation }) => {
-    const [Course, setCourse] = useState([])
     const uid = useRef();
     const getuser = () => {
         onAuthStateChanged(auth, (user) => {
@@ -22,20 +20,12 @@ const Home = ({ navigation }) => {
             }
         });
     }
+
     useEffect(() => {
-        getdata();
         getuser();
     }, [])
 
-    const getdata = async () => {
-        const querySnapshot = await getDocs(collection(db, "/Courses"));
-        let theseData = querySnapshot.docs.map((doc) => {
-            return { ...doc.data(), id: doc.id };
-        })
-        setCourse([...Course, ...theseData]);
-    }
 
-    
     let [fontsLoaded] = useFonts({
         "Poppins-Light": require('../assets/fonts/Poppins-Light.ttf')
     });
@@ -44,39 +34,12 @@ const Home = ({ navigation }) => {
         return null;
     }
 
-    const courseCard = ({ item }) => {
-        console.log()
-        return (
-            <View style={styles.mainContainer}>
-                <View style={styles.courseContainer}>
-                    <View style={styles.course_images}>
-                        <Image
-                            style={styles.cardImage}
-                            source={{ uri: `${item.image}` }}
-                            resizeMode="contain"
-                        />
-                    </View>
-                    <View style={styles.course_details}>
-                        <Text style={styles.course_name}>{item.course_name}</Text>
-                        <Text style={styles.author_name}>{item.author_name}</Text>
-                        <Text style={styles.description}>{item.description}</Text>
-                    </View>
 
-                    <View style={styles.buttonContainer}>
-                        <TouchableOpacity
-                            style={styles.buttonStyle}
-                            onPress={()=>navigation.navigate('Video')}>
-                            <Text style={styles.buttonText}>COURSE DETAILS </Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </View>
-        );
-    };
+
     return (
         <>
             <View style={styles.container}>
-                <FlatList data={Course} renderItem={courseCard} keyExtractor={(item) => item.index}></FlatList>
+                <Text>Home</Text>
             </View>
         </>
     );
@@ -85,74 +48,9 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: "center",
         alignItems: 'center'
-    },
-    cardImage: {
-        width: "100%",
-        height: undefined,
-        aspectRatio: 1,
-        marginVertical: -70,
-    },
-    mainContainer: {
-        paddingHorizontal: 15,
-    },
-    
-    courseContainer: {
-        padding: 0,
-        backgroundColor: "rgba(255, 255, 255, 0.90)",
-        textAlign: "center",
-        borderRadius: 5,
-        shadowColor: "grey",
-        shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.5,
-        shadowRadius: 8,
-        elevation: 8,
-        marginVertical: 30,
-    },
-    course_details:{
-        padding:20
-      },
-    course_name:{
-       fontSize:18,
-       fontWeight:'600',
-       fontFamily:"Poppins-Light"
-    },
-    author_name:{
-        fontSize:16,
-        fontWeight:'600',
-        fontFamily:"Poppins-Light"
-     },
-   
-    description: {
-        fontFamily:"Poppins-Light",
-        textAlign: "left",
-        paddingBottom: 5,
-        lineHeight: 20,
-        fontSize: 14,
-        color: "#7d7d7d",
-    },
-    buttonContainer: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-    },
-    buttonStyle: {
-        backgroundColor: "#5110D1",
-        borderRadius: 5,
-        paddingVertical: 8,
-        paddingHorizontal: 8,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        fontFamily:"Poppins-Light",
-        marginBottom:20,
-    },
-    buttonText: {
-        fontSize: 16,
-        color: "#eee",
-        textTransform: "capitalize",
-    },
+    }
 })
 
 export default Home;
